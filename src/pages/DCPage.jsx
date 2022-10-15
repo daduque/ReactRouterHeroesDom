@@ -1,14 +1,34 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import HeroCard from '../components/HeroCard'
 
 const DCPage = () => {
-  return (
-    <section>
+  const [heroes, setHeroes] = useState([])
+  useEffect(() => {
+      fetch('https://dh-heroes-app.herokuapp.com/api/publisher/dc')
+      .then(response => response.json())
+      .then(({data}) => {
+          return setHeroes(data)
+      })
+  }, [])
 
-    <div className='container'>
-        <h1>DC Page</h1>
-    </div>
-</section>
-  )
+return (
+  <section>
+
+
+      <div className='container'>
+          <h1>DC Page</h1>
+          <hr />
+          <div className='justify-content-start gap-3 row'>
+              {
+                  heroes.map(hero => (
+                      <HeroCard key={hero.slug} hero={hero} />
+                  ))
+              }
+
+          </div>
+      </div>
+  </section>
+)
 }
 
 export default DCPage

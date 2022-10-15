@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import HeroCard from '../components/HeroCard'
+import NavBar from '../components/NavBar'
 
 const HomePage = () => {
 
@@ -10,20 +12,22 @@ const HomePage = () => {
             return setHeroes(data)
         })
     }, [])
-    //Una variable de estado para guardar el listado de heroes
-    //llamar al endpoint de heroes al momento de cargar el componente
-    //Verificar que la variable con el listado de heroes tenga datos
-    //Revisar el state desde el navegador
-    //recorrer la variable con el listado de heroes y mostrarlos en la página
-
-
 
   return (
     <section>
 
+
         <div className='container'>
             <h1>Home Page</h1>
             <hr />
+            <div className='justify-content-start gap-3 row'>
+                {
+                    heroes.map(hero => (
+                        <HeroCard key={hero.slug} hero={hero} />
+                    ))
+                }
+
+            </div>
         </div>
     </section>
   )
